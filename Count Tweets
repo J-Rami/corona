@@ -1,0 +1,22 @@
+import operator
+import json
+from collections import Counter
+
+fname = 'mytweets.json'
+with open(fname, 'r') as f:
+    all_tweets = Counter()
+
+    for line in f:
+        tweet = json.loads(line)
+
+        # Create a list with all the terms
+
+        all_terms = [term for term in preprocess(tweet['text'])]
+
+        # Update the counter
+
+        all_tweets.update(all_terms)
+
+    # Print the first 5 most frequent words
+
+    print(all_tweets.most_common(5))
